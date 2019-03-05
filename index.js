@@ -19,14 +19,14 @@ app.get('chat/', function(req, res){
 // Socket:
 io.on('connection', function(socket){
   
-  // Inform everyone that someone connected
+  // Inform everyone that someone connected:
   io.emit('system message', 'Mensaje del Administrador: Se conectó un usuario');
   
-  io.on('connection', function(socket){
-    socket.on('chat message', function(msg){
-      io.emit('chat message', msg);
-    });
+  // Pass user messages for everyone:
+  socket.on('chat message', function(msg){
+    io.emit('chat message', msg);
   });
+  
 });
 
 
